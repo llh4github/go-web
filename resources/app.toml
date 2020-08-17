@@ -1,0 +1,7 @@
+name='app'
+[DBConfig]
+username='root'
+password='root'
+host='127.0.0.1:3306'
+dbname='test'
+params='charset=utf8&parseTime=True&loc=Local'
