@@ -5,18 +5,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-var v *viper.Viper
-var config Config
-
-func init() {
-	v = viperReader()
-	err := v.Unmarshal(&config)
-	if err != nil {
-		log.Errorf("unable to decode into struct, %v \n", err)
-		panic("不能把配置文件内容序列化到结构体中！")
-	}
-}
-
 func viperReader() *viper.Viper {
 	v := viper.New()
 	v.SetConfigName("app")
