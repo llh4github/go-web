@@ -1,7 +1,13 @@
 package main
 
-import "demo4casbin/api"
+import (
+	"demo4casbin/api"
+	"github.com/sirupsen/logrus"
+)
 
 func main() {
-	api.Router.Run()
+	err := api.Router.Run()
+	if err != nil {
+		logrus.Error("gin 启动失败！")
+	}
 }
