@@ -34,4 +34,6 @@ func (baseAPI) respJSON(c *gin.Context, data common.JSONWrapper) {
 func registerEcho() {
 	api := echoAPI{}
 	APIGroup.GET("echo", api.hello)
+	APIGroup.GET("echo/who", api.helloSomeone)
+	APIGroup.POST("echo/girl", api.helloGirl)
 }

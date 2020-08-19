@@ -11,3 +11,8 @@ type JSONWrapper struct {
 func OkResponse(data interface{}) JSONWrapper {
 	return JSONWrapper{Code: 200, Msg: "ok", Data: data}
 }
+
+// ErrorResponse 成功处理的响应
+func ErrorResponse(code int, msg string) JSONWrapper {
+	return JSONWrapper{Code: code, Msg: msg, Data: nil}
+}
