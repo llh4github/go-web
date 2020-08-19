@@ -12,6 +12,7 @@ var config Config
 
 func init() {
 	readConfig()
+	connectionDB()
 }
 func readConfig() {
 	v = viperReader()
@@ -27,6 +28,6 @@ func connectionDB() {
 	defer db.Close()
 	if err != nil {
 		log.Errorf("database connect error: %v \n", err)
-		// panic("数据库连接失败！")
+		panic("数据库连接失败！")
 	}
 }
