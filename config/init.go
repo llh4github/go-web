@@ -10,6 +10,9 @@ import (
 var v *viper.Viper
 var config Config
 
+// MyDB 当前数据库连接实例
+var MyDB *gorm.DB
+
 func init() {
 	readConfig()
 	connectionDB()
@@ -24,10 +27,13 @@ func readConfig() {
 }
 func connectionDB() {
 	// "root:root@tcp(127.0.0.1:3306)/test?charset=utf8&parseTime=True&loc=Local"
-	db, err := gorm.Open("mysql", dbConfig())
-	defer db.Close()
+	var err error
+	MyDB, err = gorm.Open("mysql", dbConfig())
+	MyDB.LogMode(true)
 	if err != nil {
+		defer MyDB.Close()
 		log.Errorf("database connect error: %v \n", err)
 		panic("数据库连接失败！")
 	}
+	MyDB.SingularTable(true)
 }
