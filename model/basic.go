@@ -17,16 +17,18 @@ type BasicModel struct {
 }
 
 // SetCreatedInfo 设置模型创建信息
-func (m BasicModel) SetCreatedInfo() {
+func (m *BasicModel) SetCreatedInfo() {
 	rand.Seed(time.Now().Unix())
 	m.CreatedAt = time.Now()
 	// TODO 完善获取创建人信息的方法
 	m.CreatedBy = rand.Intn(20)
 	m.RemoveFlag = false
+	m.UpdatedAt = nil
+	m.UpdatedBy = nil
 }
 
 // SetUpdateInfo 设置模型更新信息
-func (m BasicModel) SetUpdateInfo() {
+func (m *BasicModel) SetUpdateInfo() {
 	rand.Seed(time.Now().Unix())
 	n := time.Now()
 	by := rand.Intn(20)

@@ -6,8 +6,7 @@ import (
 
 func TestAdd(t *testing.T) {
 	user := User{Username: "Tom"}
-	user.SetCreatedInfo()
-	saved := db.Create(&user)
+	saved := user.Add()
 	t.Log(saved)
 }
 
