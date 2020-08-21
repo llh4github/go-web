@@ -9,7 +9,7 @@ func viperReader() *viper.Viper {
 	v := viper.New()
 	v.SetConfigName("app")
 	v.SetConfigType("toml")
-	v.AddConfigPath("../resources/")
+	v.AddConfigPath("./resources/")
 	if err := v.ReadInConfig(); err != nil {
 		log.Error(err)
 		panic("读取配置文件失败！")
