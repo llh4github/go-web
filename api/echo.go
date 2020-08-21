@@ -1,8 +1,8 @@
 package api
 
 import (
-	"demo4casbin/common"
 	"fmt"
+	"gitee.com/llh-gitee/go-web/common"
 
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"

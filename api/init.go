@@ -1,8 +1,8 @@
 package api
 
 import (
-	"demo4casbin/common"
-	"demo4casbin/middleware"
+	"gitee.com/llh-gitee/go-web/common"
+	"gitee.com/llh-gitee/go-web/middleware"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"demo4casbin/api"
-	"demo4casbin/config"
+	"gitee.com/llh-gitee/go-web/api"
+	"gitee.com/llh-gitee/go-web/config"
 
 	"github.com/sirupsen/logrus"
 )

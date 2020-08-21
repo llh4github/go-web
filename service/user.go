@@ -1,7 +1,7 @@
 package service
 
 import (
-	"demo4casbin/model"
+	"gitee.com/llh-gitee/go-web/model"
 
 	"github.com/sirupsen/logrus"
 )

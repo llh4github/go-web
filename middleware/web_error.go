@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"demo4casbin/common"
+	"gitee.com/llh-gitee/go-web/common"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

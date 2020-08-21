@@ -1,7 +1,7 @@
 package service
 
 import (
-	"demo4casbin/config"
+	"gitee.com/llh-gitee/go-web/config"
 
 	"github.com/jinzhu/gorm"
 )

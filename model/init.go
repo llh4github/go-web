@@ -1,6 +1,6 @@
 package model
 
-import "demo4casbin/config"
+import "gitee.com/llh-gitee/go-web/config"
 
 var db = config.MyDB
 

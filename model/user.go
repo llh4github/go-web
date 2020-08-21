@@ -1,7 +1,7 @@
 package model
 
 import (
-	"demo4casbin/common/utils"
+	"gitee.com/llh-gitee/go-web/common/utils"
 
 	"github.com/sirupsen/logrus"
 )

@@ -1,9 +1,9 @@
 package api
 
 import (
-	"demo4casbin/common"
-	"demo4casbin/model"
-	"demo4casbin/service"
+	"gitee.com/llh-gitee/go-web/common"
+	"gitee.com/llh-gitee/go-web/model"
+	"gitee.com/llh-gitee/go-web/service"
 
 	"github.com/gin-gonic/gin"
 
