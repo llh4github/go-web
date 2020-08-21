@@ -24,6 +24,8 @@ const (
 const (
 	// SysError 系统异常
 	SysError int = 50000 + iota
+	// DataBindError 数据绑定异常
+	DataBindError
 	// UnknownError 未知异常
 	UnknownError
 )
@@ -39,6 +41,8 @@ func GetErrorInfo(errorCode int) (code int, msg string) {
 		msg = "授权异常"
 	case PwdError:
 		msg = "用户或密码错误"
+	case DataBindError:
+		msg = "数据绑定异常"
 	case SysError:
 		msg = "系统异常"
 	default:

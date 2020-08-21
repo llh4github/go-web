@@ -10,8 +10,6 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-//  var service = &service.User{}
-
 type user struct {
 	baseAPI
 }
@@ -21,9 +19,8 @@ func (m *user) Add(c *gin.Context) {
 	var user model.User
 	if err := c.BindJSON(&user); err != nil {
 		log.Errorf("数据绑定错误, %v \n", err)
-		m.respJSON(c, common.ErrorResponse(500, "数据绑定错误"))
+		common.ExceptionByCode(common.DataBindError)
 	}
-	// common.ExceptionByCode(common.AuthError)
 	r := service.Add(user)
 
 	m.respJSON(c, common.OkResponse(r))
