@@ -20,7 +20,7 @@ type user struct {
 func (m *user) Add(c *gin.Context) {
 	service := service.User{}
 	var user model.User
-	if err := c.ShouldBind(&user); err != nil {
+	if err := c.BindJSON(&user); err != nil {
 		log.Errorf("数据绑定错误, %v \n", err)
 		m.respJSON(c, common.ErrorResponse(500, "数据绑定错误"))
 	}

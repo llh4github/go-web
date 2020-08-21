@@ -15,10 +15,14 @@ func (s *User) Add(u model.User) bool {
 
 	u.SetCreatedInfo()
 	u.SetPassowrd(u.Password)
-	if err := db.Create(&u); err != nil {
-		logrus.Error("user info insert to db error : ", err)
+	tx := db.Begin()
+	tx.Create(&u)
+	if tx.NewRecord(&u) {
+		logrus.Error("user info insert to db error ")
+		tx.Rollback()
 		return false
 	}
+	tx.Commit()
 	return true
 
 }
