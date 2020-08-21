@@ -4,7 +4,6 @@ import (
 	"demo4casbin/common"
 	"demo4casbin/model"
 	"demo4casbin/service"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
 
@@ -24,7 +23,8 @@ func (m *user) Add(c *gin.Context) {
 		log.Errorf("数据绑定错误, %v \n", err)
 		m.respJSON(c, common.ErrorResponse(500, "数据绑定错误"))
 	}
-	fmt.Println("序列化后的user : ", user)
+	// common.ExceptionByCode(common.AuthError)
 	r := service.Add(user)
+
 	m.respJSON(c, common.OkResponse(r))
 }
