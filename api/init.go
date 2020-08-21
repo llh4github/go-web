@@ -19,6 +19,7 @@ func init() {
 		c.JSON(200, gin.H{"data": "hello"})
 	})
 	registerEcho()
+	registerUser()
 }
 
 // 基础API结构体。
@@ -36,4 +37,8 @@ func registerEcho() {
 	APIGroup.GET("echo", api.hello)
 	APIGroup.GET("echo/who", api.helloSomeone)
 	APIGroup.POST("echo/girl", api.helloGirl)
+}
+func registerUser() {
+	r := user{}
+	APIGroup.POST("user", r.Add)
 }

@@ -9,15 +9,13 @@ import (
 // User 用户模型
 type User struct {
 	BasicModel
-	Username string
-	Password string
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 // SetPassowrd 设置密码
 func (u *User) SetPassowrd(raw string) {
-	var err error
-	var pwd string
-	pwd, err = utils.HashPassword(raw)
+	pwd, err := utils.HashPassword(raw)
 	if err != nil {
 		logrus.Error("用户密码加密出错！", err)
 		panic("用户密码加密出错！")
