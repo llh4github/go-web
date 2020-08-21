@@ -2,6 +2,7 @@ package api
 
 import (
 	"demo4casbin/common"
+	"demo4casbin/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,6 +16,7 @@ var APIGroup *gin.RouterGroup
 func init() {
 	Router = gin.Default()
 	APIGroup = Router.Group("api")
+	APIGroup.Use(middleware.HandleWebException)
 	APIGroup.GET("", func(c *gin.Context) {
 		c.JSON(200, gin.H{"data": "hello"})
 	})
