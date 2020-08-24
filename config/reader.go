@@ -1,20 +1,41 @@
 package config
 
 import (
+	"os"
+	"strings"
+
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
+
+const myApp = "go-web"
 
 func viperReader() *viper.Viper {
 	v := viper.New()
 	v.SetConfigName("app")
 	v.SetConfigType("toml")
-	v.AddConfigPath("./resources/")
+	v.AddConfigPath(getProjectDir() + "/resources/")
 	if err := v.ReadInConfig(); err != nil {
 		log.Error(err)
-		panic("读取配置文件失败！")
+		// panic("读取配置文件失败！")
 	}
 	return v
+}
+
+// getWorkDir 获取当前项目目录
+func getProjectDir() string {
+	dir, err := os.Getwd()
+	if err != nil {
+		log.Error("获取当前项目目录失败！", err)
+		panic("获取当前项目目录失败！")
+	}
+	paths := strings.Split(dir, myApp)
+	projectDir := paths[0] + "/" + myApp
+	if info, e := os.Stat(projectDir); e != nil && !info.IsDir() {
+		log.Error("获取当前项目目录失败！", err)
+		panic("获取当前项目目录失败！")
+	}
+	return projectDir
 }
 
 // GetBDConfig 获取数据库配置
