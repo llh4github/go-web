@@ -6,12 +6,25 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
+const (
+	// Iss jwt签发者
+	Iss string = "iss"
+	// Sub  jwt所面向的用户
+	Sub = "sub"
+	// Exp jwt的过期时间，这个过期时间必须要大于签发时间
+	Exp = "exp"
+	// Iat  jwt的签发时间
+	Iat = "iat"
+)
+
 // CreateToken 创建token
-func CreateToken(uid, secret string) (string, error) {
-	at := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"uid": uid, "exp": time.Now().Add(time.Minute * 15).Unix(),
-	})
-	token, err := at.SignedString([]byte(secret))
+func CreateToken(uid string) (string, error) {
+	claims := jwt.MapClaims{}
+	claims[Sub] = uid
+	claims[Iat] = time.Now()
+	claims[Exp] = time.Now().Add(time.Minute * time.Duration(jwtConf.Exp))
+	at := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	token, err := at.SignedString([]byte(jwtConf.Secret))
 	if err != nil {
 		return "", err
 	}
