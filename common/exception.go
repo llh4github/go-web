@@ -30,6 +30,15 @@ const (
 	UnknownError
 )
 
+const (
+	// ConfigError 配置异常
+	ConfigError int = 50010 + iota
+	// JwtCreate Jwt创建异常
+	JwtCreate
+	// JwtParse Jwt解析异常
+	JwtParse
+)
+
 // GetErrorInfo 获取异常信息
 //
 // 返回异常代码和文本消息。
@@ -45,6 +54,12 @@ func GetErrorInfo(errorCode int) (code int, msg string) {
 		msg = "数据绑定异常"
 	case SysError:
 		msg = "系统异常"
+	case ConfigError:
+		msg = "配置异常"
+	case JwtCreate:
+		msg = "Jwt创建异常"
+	case JwtParse:
+		msg = "Jwt解析异常"
 	default:
 		msg = "未知异常"
 	}

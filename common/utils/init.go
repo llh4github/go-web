@@ -7,4 +7,5 @@ var jwtConf config.JwtConfig
 
 func init() {
 	jwtConf = config.GetJwtConfig()
+
 }
