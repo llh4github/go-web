@@ -25,3 +25,13 @@ func (m *user) Add(c *gin.Context) {
 
 	m.respJSON(c, common.OkResponse(r))
 }
+func (m *user) login(c *gin.Context) {
+	service := service.User{}
+	var user model.User
+	if err := c.BindJSON(&user); err != nil {
+		log.Errorf("数据绑定错误, %v \n", err)
+		common.ExceptionByCode(common.DataBindError)
+	}
+	rs := service.Login(user)
+	m.respJSON(c, common.OkResponse(rs))
+}

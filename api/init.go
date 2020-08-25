@@ -43,4 +43,5 @@ func registerEcho() {
 func registerUser() {
 	r := user{}
 	APIGroup.POST("user", r.Add)
+	APIGroup.POST("user/login", r.login)
 }
