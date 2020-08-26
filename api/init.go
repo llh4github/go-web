@@ -17,6 +17,7 @@ func init() {
 	Router = gin.Default()
 	APIGroup = Router.Group("api")
 	APIGroup.Use(middleware.HandleWebException)
+	APIGroup.Use(middleware.CasbinMiddleWare)
 	APIGroup.GET("", func(c *gin.Context) {
 		c.JSON(200, gin.H{"data": "hello"})
 	})
