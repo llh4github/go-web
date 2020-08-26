@@ -7,4 +7,5 @@ var db = config.MyDB
 // 模型注册
 func init() {
 	db.AutoMigrate(&User{})
+	db.AutoMigrate(&Role{})
 }
