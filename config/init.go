@@ -3,8 +3,8 @@ package config
 import (
 	"fmt"
 
-	"github.com/casbin/casbin"
-	gormadapter "github.com/casbin/gorm-adapter"
+	"github.com/casbin/casbin/v2"
+	gormadapter "github.com/casbin/gorm-adapter/v3"
 	_ "github.com/go-sql-driver/mysql" // mysql dirve
 	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
@@ -40,8 +40,8 @@ func connectionDB() {
 	var err error
 	MyDB, err = gorm.Open("mysql", dbConfig())
 
-	CasibnAdapter = gormadapter.NewAdapterByDB(MyDB)
-	Enforcer = casbin.NewEnforcer(getProjectDir()+"/resources/rbac_models.conf", CasibnAdapter)
+	CasibnAdapter, err = gormadapter.NewAdapterByDB(MyDB)
+	Enforcer, err = casbin.NewEnforcer(getProjectDir()+"/resources/rbac_models.conf", CasibnAdapter)
 	// 开启权限认证日志
 	Enforcer.EnableLog(true)
 	// 加载数据库中的策略
@@ -52,7 +52,7 @@ func connectionDB() {
 	}
 	// 创建一个角色,并赋于权限
 	// admin 这个角色可以访问GET 方式访问 /api/v2/ping
-	res := Enforcer.AddPolicy("admin", "/api/v2/ping", "GET")
+	res, err := Enforcer.AddPolicy("admin", "/api/v2/ping", "GET")
 	if !res {
 		fmt.Println("policy is exist")
 	} else {
