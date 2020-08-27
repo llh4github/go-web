@@ -8,11 +8,11 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gin-gonic/gin v1.6.3
-	github.com/go-sql-driver/mysql v1.5.0
-	github.com/jinzhu/gorm v1.9.16
 	github.com/pelletier/go-toml v1.8.0 // indirect
 	github.com/sirupsen/logrus v1.6.0
 	github.com/spf13/viper v1.7.1
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
-	golang.org/x/sys v0.0.0-20200820212457-1fb795427249 // indirect
+	golang.org/x/sys v0.0.0-20200824131525-c12d262b63d8 // indirect
+	gorm.io/driver/mysql v0.3.0
+	gorm.io/gorm v0.2.23
 )
