@@ -9,8 +9,8 @@ import (
 // 测试
 func TestAdd(t *testing.T) {
 	m := model.Role{
-		RoleName: "admin",
-		Remark:   "admin",
+		RoleName: "admin1",
+		Remark:   "admin2",
 	}
 	s := Role{}
 

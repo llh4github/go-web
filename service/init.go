@@ -3,7 +3,7 @@ package service
 import (
 	"gitee.com/llh-gitee/go-web/config"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 var db *gorm.DB

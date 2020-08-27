@@ -6,8 +6,6 @@ import (
 	"gitee.com/llh-gitee/go-web/common"
 	"gitee.com/llh-gitee/go-web/common/utils"
 	"gitee.com/llh-gitee/go-web/model"
-
-	"github.com/sirupsen/logrus"
 )
 
 // User 用户服务层
@@ -19,15 +17,8 @@ func (s *User) Add(u model.User) bool {
 
 	u.SetCreatedInfo()
 	u.SetPassowrd(u.Password)
-	tx := db.Begin()
-	tx.Create(&u)
-	if tx.NewRecord(&u) {
-		logrus.Error("user info insert to db error ")
-		tx.Rollback()
-		return false
-	}
-	tx.Commit()
-	return true
+	result := db.Create(&u)
+	return result.RowsAffected == 1
 
 }
 
