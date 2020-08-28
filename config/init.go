@@ -94,8 +94,8 @@ func connectionDB() {
 		// gorm v2 不推荐使用db.Close()方法了
 		// 其方法调用隐藏的更深了。
 		// 暂时不Close()看看吧
-		// _db, er:=  MyDB.DB()
-		// _db.Close()
+		_db, _ := MyDB.DB()
+		_db.Close()
 		log.Errorf("database connect error: %v \n", err)
 		panic("数据库连接失败！")
 	}

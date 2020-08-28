@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"os"
 	"strings"
 
@@ -44,6 +45,12 @@ func GetBDConfig() DBConfig {
 	return config.Dbconfig
 }
 
+// GetURLPerfix 获取配置文件中url前缀
+func GetURLPrefix() string {
+	fmt.Println("GetURLPerfix : " + config.URLPrefix)
+	return config.URLPrefix
+}
+
 // GetJwtConfig jwt的配置
 func GetJwtConfig() JwtConfig {
 	return config.Jwt
@@ -51,6 +58,9 @@ func GetJwtConfig() JwtConfig {
 
 // Config 所有配置项
 type Config struct {
+	// URLPrefix gin会判断是不是以 / 开头，不用考虑gin配置。为了使用方便请以 / 开头配置此项目
+	URLPrefix string
+
 	Name     string
 	Dbconfig DBConfig
 	Jwt      JwtConfig

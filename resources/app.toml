@@ -1,4 +1,6 @@
 name='app'
+# gin会判断是不是以 / 开头，不用考虑gin配置。为了使用方便请以 / 开头配置此项目
+URLPrefix="/api"
 [DBConfig]
 username='root'
 password='root'
