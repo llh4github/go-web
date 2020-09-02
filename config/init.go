@@ -46,7 +46,16 @@ func readConfig() {
 func addCasibnAdapter() {
 	var err error
 	CasibnAdapter, err = gormadapter.NewAdapterByDB(MyDB)
-	Enforcer, err = casbin.NewEnforcer(getProjectDir()+"/resources/rbac_models.conf", CasibnAdapter)
+	if err != nil {
+		fmt.Println("NewAdapterByDB error : ", err)
+	}
+	a, e := casbin.NewEnforcer(getProjectDir()+"/resources/rbac_models.conf", CasibnAdapter)
+	if e != nil {
+		log.Debug("fuck : ", a)
+		log.Error("NewEnforcer error : ", err)
+	} else {
+		log.Debug("fuck : ", a)
+	}
 	// 开启权限认证日志
 	Enforcer.EnableLog(true)
 	// 加载数据库中的策略
@@ -63,7 +72,7 @@ func addCasibnAdapter() {
 	} else {
 		fmt.Println("policy is not exist, adding")
 	}
-	log.Errorln(Enforcer.AddRoleForUser)
+	// log.Errorln(Enforcer.AddRoleForUser)
 	// 将 test 用户加入一个角色中
 	// Enforcer.AddRoleForUser("test", "root")
 	Enforcer.AddRoleForUser("tom", "admin")
