@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"testing"
@@ -63,4 +64,40 @@ func dbConn() *gorm.DB {
 		println("数据库连接失败！")
 	}
 	return db
+}
+
+// 添加 Casibn Adapter
+func addCasibnAdapter() {
+	var err error
+	CasibnAdapter, err = gormadapter.NewAdapterByDB(MyDB)
+	if err != nil {
+		fmt.Println("NewAdapterByDB error : ", err)
+	}
+	a, e := casbin.NewEnforcer(getProjectDir()+"/resources/rbac_models.conf", CasibnAdapter)
+	if e != nil {
+		log.Debug("fuck : ", a)
+		log.Error("NewEnforcer error : ", err)
+	} else {
+		log.Debug("fuck : ", a)
+	}
+	// 开启权限认证日志
+	Enforcer.EnableLog(true)
+	// 加载数据库中的策略
+	err = Enforcer.LoadPolicy()
+	if err != nil {
+		log.Errorf("加载数据库中的策略失败: %v \n", err)
+		// panic("数据库连接失败！")
+	}
+	// 创建一个角色,并赋于权限
+	// admin 这个角色可以访问GET 方式访问 /api/v2/ping
+	res, err := Enforcer.AddPolicy("admin", "/api/v2/ping", "GET")
+	if !res {
+		fmt.Println("policy is exist")
+	} else {
+		fmt.Println("policy is not exist, adding")
+	}
+	// log.Errorln(Enforcer.AddRoleForUser)
+	// 将 test 用户加入一个角色中
+	// Enforcer.AddRoleForUser("test", "root")
+	Enforcer.AddRoleForUser("tom", "admin")
 }

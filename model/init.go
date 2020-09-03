@@ -1,8 +1,10 @@
 package model
 
-import "gitee.com/llh-gitee/go-web/config"
+import (
+	"gitee.com/llh-gitee/go-web/common"
+)
 
-var db = config.MyDB
+var db = common.MyDB
 
 // 模型注册
 func init() {

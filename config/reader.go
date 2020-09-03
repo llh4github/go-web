@@ -13,6 +13,7 @@ const myApp = "go-web"
 
 func viperReader() *viper.Viper {
 	v := viper.New()
+	v.SetDefault("Port", "8080")
 	v.SetConfigName("app")
 	v.SetConfigType("toml")
 	v.AddConfigPath(getProjectDir() + "/resources/")
@@ -40,23 +41,28 @@ func getProjectDir() string {
 }
 
 // GetBDConfig 获取数据库配置
+// Deprecated
 func GetBDConfig() DBConfig {
 
 	return config.Dbconfig
 }
 
-// GetURLPerfix 获取配置文件中url前缀
+// GetURLPrefix 获取配置文件中url前缀
+//
+// Deprecated
 func GetURLPrefix() string {
 	fmt.Println("GetURLPerfix : " + config.URLPrefix)
 	return config.URLPrefix
 }
 
 // GetJwtConfig jwt的配置
+// Deprecated
 func GetJwtConfig() JwtConfig {
 	return config.Jwt
 }
 
 // Config 所有配置项
+// Deprecated
 type Config struct {
 	// URLPrefix gin会判断是不是以 / 开头，不用考虑gin配置。为了使用方便请以 / 开头配置此项目
 	URLPrefix string
