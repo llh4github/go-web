@@ -2,24 +2,21 @@ package api
 
 import (
 	"gitee.com/llh-gitee/go-web/common"
-	"gitee.com/llh-gitee/go-web/config"
 	"gitee.com/llh-gitee/go-web/middleware"
 
 	"github.com/gin-gonic/gin"
 )
 
 var (
-	// Router 全局gin实例
-	Router *gin.Engine
 	// APIGroup 当前使用的API组
 	APIGroup *gin.RouterGroup
 )
 
 func init() {
-	Router = gin.Default()
-	APIGroup = Router.Group(config.GetURLPrefix())
+	common.Router = gin.Default()
+	APIGroup = common.Router.Group(common.MyConf.URLPrefix)
 	APIGroup.Use(middleware.HandleWebException)
-	APIGroup.Use(middleware.CasbinMiddleWare)
+	// APIGroup.Use(middleware.CasbinMiddleWare)
 	APIGroup.GET("", func(c *gin.Context) {
 		c.JSON(200, gin.H{"data": "hello"})
 	})

@@ -1,6 +1,9 @@
 package common
 
-import "gorm.io/gorm"
+import (
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+)
 
 // 全局变量
 // 本项目使用依赖注入框架感觉上用处不太大，不如用全局变量来的简单方便
@@ -9,6 +12,8 @@ var (
 	MyDB *gorm.DB
 	// MyConf 项目配置信息
 	MyConf Conf
+	// Router 全局路由实例
+	Router *gin.Engine
 )
 
 // -------------------------- public struct ------------------------------
