@@ -9,6 +9,7 @@ import (
 
 	"github.com/casbin/casbin/v2"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
+	"github.com/sirupsen/logrus"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -75,17 +76,17 @@ func addCasibnAdapter() {
 	}
 	a, e := casbin.NewEnforcer(getProjectDir()+"/resources/rbac_models.conf", CasibnAdapter)
 	if e != nil {
-		log.Debug("fuck : ", a)
-		log.Error("NewEnforcer error : ", err)
+		logrus.Debug("fuck : ", a)
+		logrus.Error("NewEnforcer error : ", err)
 	} else {
-		log.Debug("fuck : ", a)
+		logrus.Debug("fuck : ", a)
 	}
 	// 开启权限认证日志
 	Enforcer.EnableLog(true)
 	// 加载数据库中的策略
 	err = Enforcer.LoadPolicy()
 	if err != nil {
-		log.Errorf("加载数据库中的策略失败: %v \n", err)
+		logrus.Errorf("加载数据库中的策略失败: %v \n", err)
 		// panic("数据库连接失败！")
 	}
 	// 创建一个角色,并赋于权限
